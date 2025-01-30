@@ -1,36 +1,17 @@
 <script>
-	import { onMount } from "svelte";
-	import { on } from "svelte/events";
-
-    onMount(() => {
-        console.log("se inicio")
-        getProducts()
-    })
-let productos = []
-
-function getProducts() {
-    fetch('http://localhost:4000/productos')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        productos = data
-    })
-    .catch(error => {
-        console.log(error)
-    })}
-
+	import { goto } from "$app/navigation";
+   
 </script>
-<section>
-<img class="w-full" src="portada.png" alt="">
-</section>
+	<section>
+		<img class="w-full" src="portada.png" alt="" />
+	</section>
 
-<div class="grid grid-cols-4 gap-4 items-center justify-center justify-self-center">
-    {#each productos as producto}
-        <div class="w-[188px] h-[390px] border-2x border-solidx p-4 m-8 rounded-xl shadow-2xl ">   
-            <img src={producto.image} alt={producto.productName} class="w-64 h-56 object-cover">
-            <p class="font-bold text-gray-800">{producto.productName}</p>
-            <p class="text-sm text-gray-500">{producto.description}</p>
-            <p class="font-bold text-red-400x">${producto.price}</p>
-        </div>
-    {/each}
-</div>
+	<section class="h-[550px] justify-center items-center flex flex-col">
+		<h1 class="m-16 text-center text-2xl font-bold">Nuestra Marca</h1>
+        <p class="mx-36 text-2xl text-gray-500 leading-8 italic">"En nuestra empresa, el arte del crochet se transforma en elegancia y exclusividad. Cada bolso es una obra maestra tejida a mano, donde el diseño sofisticado se une con la sostenibilidad. Utilizamos lana de alta calidad y trapillo reciclado para crear piezas únicas que realzan cualquier estilo con un toque de glamour. Más que accesorios, son declaraciones de moda, fusionando lujo artesanal y conciencia ecológica en cada detalle."</p>
+	    <button class="rounded-xl bg-black text-white h-12 w-36 m-16" 
+        on:click={() => goto('/productos')}>
+           Ver productos
+        </button>
+    </section>
+
